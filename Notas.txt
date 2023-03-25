@@ -1,0 +1,6 @@
+* Requerimientos:
+Django - Framework
+Pillow - Manejo de Imagenes
+xlwt - Exportación a Excel
+django-adminlte3 - Formato para bootstrap
+python-decouple - para el manejo de .env
