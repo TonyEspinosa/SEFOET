@@ -1,5 +1,5 @@
 from django.db import models
-
+#from django.contrib.auth.models import User
 from apps.categoria.models import m_categoria
 
 # Create your models here.
@@ -43,6 +43,8 @@ class m_proveedor(models.Model):
     RS = models.CharField(max_length=250, null=True, blank=True, verbose_name = "Razón Social")
     RFC = models.CharField(max_length=15, null=True, blank=True, verbose_name = "RFC")
     
+    #usuario = models.ForeignKey(User, null=True, verbose_name = "Usuario", on_delete=models.SET_NULL)
+
     date_created = models.DateTimeField(auto_now_add=True, null=True, verbose_name = "Creación")
 
     class Meta:
@@ -52,4 +54,4 @@ class m_proveedor(models.Model):
         ordering = ["nombre"]
 
     def __str__(self) -> str:
-        return '%s %s' % (self.nombre, self.tipo, self.categoria)
+        return '%s %s' % (self.nombre, self.tipo)
