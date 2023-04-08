@@ -3,15 +3,14 @@ from django.shortcuts import render
 from apps.proveedor.models import m_categoria #, m_proveedor, m_tipo
 from django.http import HttpResponse
 #from .utils import render_to_pdf
-#from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 import xlwt
 
 # Paginas Privadas
-#@login_required(login_url='u_usr_login')
+@login_required(login_url='u_usr_login')
 def v_inicio(request):
-    pass
-#	return render(request,'inicio.html', {})
+	return render(request,'inicio.html', {})
 
 # Paginas Publicas
 def v_home(request):

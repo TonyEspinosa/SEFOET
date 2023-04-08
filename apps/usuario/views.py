@@ -1,18 +1,18 @@
-from django.shortcuts import render #, redirect
+from django.shortcuts import render, redirect
 
-#from django.contrib import messages
+from django.contrib import messages
 #from .querys import qUsrTodo
 #from django.contrib.auth.models import User
 
 #Login
 #from .forms import CreateUserForm
-#from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout
 #from django.contrib.auth.decorators import login_required
 
 #Captcha
-#from django.conf import settings
-#import urllib
-#import json
+from django.conf import settings
+import urllib
+import json
 
 #@login_required(login_url='u_usr_login')
 def v_usr(request):
@@ -58,42 +58,39 @@ def v_usr_del(request, pk_usr):
 
 ## Login
 def v_usr_login(request):
-    pass
-#    if request.user.is_authenticated:
-#        return redirect('u_home_priv')
-#    else:
-#        if request.method == 'POST':
-#            ''' Begin reCAPTCHA validation '''
-#            recaptcha_response = request.POST.get('g-recaptcha-response')
-#            url = 'https://www.google.com/recaptcha/api/siteverify'
-#            values = {
-#                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-#                'response': recaptcha_response
-#            }
-#            data = urllib.parse.urlencode(values).encode()
-#            req =  urllib.request.Request(url, data=data)
-#            response = urllib.request.urlopen(req)
-#            result = json.loads(response.read().decode())
-#            ''' End reCAPTCHA validation '''
+    if request.user.is_authenticated:
+        return redirect('u_home_priv')
+    else:
+        if request.method == 'POST':
+            ''' Begin reCAPTCHA validation '''
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            ''' End reCAPTCHA validation '''
 
-#            if result['success']:
-#                uname = request.POST.get('username')
-#                pword = request.POST.get('password')
+            if result['success']:
+                uname = request.POST.get('username')
+                pword = request.POST.get('password')
 
-#                user = authenticate(request, username=uname, password=pword)
-#                if user is not None:
-#                    login(request, user)
-#                    return redirect('u_home_priv')
-#                else:
-#                    messages.info(request, 'Usuario o contraseña incorrectos...')
-#            else:
-#                messages.error(request, 'reCAPTCHA invalido. Intenta nuevamente...')
-        
-#        context = {}
-#        return render(request, 'usr_login.html', context)
+                user = authenticate(request, username=uname, password=pword)
+                if user is not None:
+                    login(request, user)
+                    return redirect('u_home_priv')
+                else:
+                    messages.info(request, 'Usuario o contraseña incorrectos...')
+            else:
+                messages.error(request, 'reCAPTCHA invalido. Intenta nuevamente...')
+        context = {}
+        return render(request, 'usr_login.html', context)
 
 ## Logout
 def v_usr_logout(request):
-    pass
-#    logout(request)
-#    return redirect('u_usr_login')
+    logout(request)
+    return redirect('u_usr_login')
