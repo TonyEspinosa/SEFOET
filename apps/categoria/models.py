@@ -1,10 +1,28 @@
 from django.db import models
 
+class UpperCharField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        self.is_uppercase = kwargs.pop('uppercase', False)
+        super(UpperCharField, self).__init__(*args, **kwargs)
+
+    def get_prep_value(self, value):
+        value = super(UpperCharField, self).get_prep_value(value)
+        if self.is_uppercase:
+            return value.upper()
+
+        return value
+
+    def from_db_value(self, value, expression, connection, context=None):
+        if self.is_uppercase:
+            return value.upper()
+
+        return value
+        
 # Create your models here.
 class m_categoria(models.Model):
     id_categoria = models.AutoField(primary_key = True, db_column='id_categoria')
 
-    nombre = models.CharField(max_length=250, null=True, verbose_name = "Nombre")
+    nombre = UpperCharField(max_length=250, null=True, verbose_name = "Nombre", uppercase=True)
     color = models.CharField(max_length=7, null=True, verbose_name = "Color")
     descripcion = models.TextField(max_length=500, null=True, verbose_name = "Descripción")
     image = models.ImageField(upload_to="categoria", null=True, verbose_name="Foto", blank=True)

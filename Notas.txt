@@ -4,3 +4,5 @@ Pillow - Manejo de Imagenes
 xlwt - Exportación a Excel
 django-adminlte3 - Formato para bootstrap
 python-decouple - para el manejo de .env
+django-crispy-forms - formularios con formato automático (como es version 2.0 hay que agregar otras cosas)
+crispy-bootstrap4 - debido a que crispy forms es version 2.0

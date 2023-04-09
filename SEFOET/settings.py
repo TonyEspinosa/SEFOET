@@ -38,6 +38,10 @@ INSTALLED_APPS = [
      # Optional: Django admin theme (must be before django.contrib.admin)
     'adminlte3_theme',
 
+    #Crispy Forms
+    'crispy_forms',
+    'crispy_bootstrap4',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -144,3 +148,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #reCaptcha SecretKey
 GOOGLE_RECAPTCHA_SECRET_KEY = config("GOOGLE_RECAPTCHA_SECRET_KEY")
+
+#
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

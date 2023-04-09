@@ -10,7 +10,9 @@
         <div class="card-body">
             <form action="" method="POST">
                 {% csrf_token %}
+
                 {{ form | crispy }}
+                
                 <p>Imagen de 900 x 900</p>
                 <br>
                 <input type="submit" class="btn btn-primary" name="Guardar">
