@@ -23,7 +23,7 @@
     {% if cat %}
         {% for item in cat %}
             <tr class="table-active">
-                <th scope="row">{{ item.nombre }}</th>
+                <th scope="row">{{ item.image }}{{ item.nombre }}</th>
                 <td>
                     <a href="{% url 'u_cat_upd' item.id_categoria %}"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt fa-solid"> Editar</i></button></a>
                     <a href="{% url 'u_cat_del' item.id_categoria %}"><button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt fa-solid"> Eliminar</i></button></a>

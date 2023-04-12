@@ -30,25 +30,27 @@ def v_cat_new(request):
     #context = {'cat':qCatID}
     return render(request, 'cat_new.html', context)
 
-#@login_required(login_url='u_usr_login')
+@login_required(login_url='u_usr_login')
 def v_cat_upd(request, pk_cat):
-    pass
-#    qCatID = m_categoria.objects.get(id_categoria = pk_cat)
-#    form = fm_categoria(instance = qCatID)
-#    context = {'form':form}
-#    return render(request, 'cat_new.html', context)
+    qCatID = m_categoria.objects.get(id_categoria = pk_cat)
+    form = fm_categoria(instance = qCatID)
+    if request.method == 'POST':
+        form = fm_categoria(request.POST, instance = qCatID)
+        if form.is_valid():
+            form.save()
+            return redirect('u_cat_list')
+    context = {'form':form}
+    return render(request, 'cat_upd.html', context)
 
-#@login_required(login_url='u_usr_login')
+@login_required(login_url='u_usr_login')
 def v_cat_del(request, pk_cat):
-    pass
-#    qCatID = m_categoria.objects.get(id_categoria = pk_cat)
-
-#    if request.method == "POST":
-#        qCatID.delete()
-#        return redirect('u_cat_list')
+    qCatID = m_categoria.objects.get(id_categoria = pk_cat)
+    if request.method == "POST":
+        qCatID.delete()
+        return redirect('u_cat_list')
         
-#    context = {'item':qCatID}
-#    return render(request, 'cat_del.html', context)
+    context = {'item':qCatID}
+    return render(request, 'cat_del.html', context)
 
 #@login_required(login_url='u_usr_login')
 def v_export_excel(request):

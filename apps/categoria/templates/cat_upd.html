@@ -1,7 +1,23 @@
 {% extends 'inicio.html' %}
 {% load static %}
 
+{# TODO: Register crispy_forms_tags #}
+{% load crispy_forms_tags %}
+
 {% block content %}
-    {% csrf_token %}
-    Update
+<div class="row">
+    <div class="col-6">
+        <div class="card-body">
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{ form | crispy }}
+                
+                <p>Imagen de 900 x 900</p>
+                <br>
+                <input type="submit" class="btn btn-primary" name="Guardar">
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
