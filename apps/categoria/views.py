@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 import datetime
 import xlwt
@@ -52,35 +53,34 @@ def v_cat_del(request, pk_cat):
     context = {'item':qCatID}
     return render(request, 'cat_del.html', context)
 
-#@login_required(login_url='u_usr_login')
+@login_required(login_url='u_usr_login')
 def v_export_excel(request):
-    pass
-#    response = HttpResponse(content_type='application/ms-excel')
-#    response['Content-Disposition'] = 'attachment; filename=Categoria' + \
-#        str(datetime.datetime.now()) + '.xls'
-    
-#    wb = xlwt.Workbook(encoding='utf-8')
-#    ws = wb.add_sheet('Categoria')
-#    row_num = 0
-#    font_style = xlwt.XFStyle()
-#    font_style.font.bold = True
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=Categoria' + \
+        str(datetime.datetime.now()) + '.xls'
 
-#    columns = ['Nombre', 'Descripcion']
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Categoria')
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
 
-#    for col_num in range(len(columns)):
-#        ws.write(row_num, col_num, columns[col_num], font_style)
-    
-#    font_style = xlwt.XFStyle()
-    ##font_style.font.bold = False
+    columns = ['Nombre', 'Descripcion']
 
-#    rows = m_categoria.objects.all().values_list('nombre', 'descripcion')
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
 
-#    for row in rows:
-#        row_num+=1
+    font_style = xlwt.XFStyle()
+    #font_style.font.bold = False
 
-#        for col_num in range(len(row)):
-#            ws.write(row_num, col_num, str(row[col_num]), font_style)
+    rows = m_categoria.objects.all().values_list('nombre', 'descripcion')
 
-#    wb.save(response)
+    for row in rows:
+        row_num+=1
 
-#    return response
+        for col_num in range(len(row)):
+            ws.write(row_num, col_num, str(row[col_num]), font_style)
+
+    wb.save(response)
+
+    return response
