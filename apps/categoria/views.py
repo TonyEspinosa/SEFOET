@@ -22,7 +22,7 @@ def v_cat_new(request):
     if request.method == 'POST':
         #Imprimir en línea de comandos cuando sea un POST
         #print('Printing POST:', request.POST) 
-        form = fm_categoria(request.POST)
+        form = fm_categoria(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('u_cat_list') 
@@ -36,7 +36,7 @@ def v_cat_upd(request, pk_cat):
     qCatID = m_categoria.objects.get(id_categoria = pk_cat)
     form = fm_categoria(instance = qCatID)
     if request.method == 'POST':
-        form = fm_categoria(request.POST, instance = qCatID)
+        form = fm_categoria(request.POST, request.FILES, instance = qCatID)
         if form.is_valid():
             form.save()
             return redirect('u_cat_list')

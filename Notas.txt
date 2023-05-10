@@ -1,3 +1,9 @@
+* Proceso de Instalación en máquina nueva
+1.- Instalar Python (Add python.exe to PATH)
+2.- Crear carpeta del proyecto
+3.- Crear ambiente virtual en carpeta
+4.- Copiar archivos
+
 * Requerimientos:
 Django - Framework
 Pillow - Manejo de Imagenes

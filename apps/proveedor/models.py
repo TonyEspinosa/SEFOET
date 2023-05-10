@@ -2,11 +2,29 @@ from django.db import models
 #from django.contrib.auth.models import User
 from apps.categoria.models import m_categoria
 
+class UpperCharField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        self.is_uppercase = kwargs.pop('uppercase', False)
+        super(UpperCharField, self).__init__(*args, **kwargs)
+
+    def get_prep_value(self, value):
+        value = super(UpperCharField, self).get_prep_value(value)
+        if self.is_uppercase:
+            return value.upper()
+
+        return value
+
+    def from_db_value(self, value, expression, connection, context=None):
+        if self.is_uppercase:
+            return value.upper()
+
+        return value
+
 # Create your models here.
 class m_tipo(models.Model):
     id_tipo = models.AutoField(primary_key = True, db_column='id_tipo')
     
-    nombre = models.CharField(max_length=150, null=True, verbose_name = "Nombre")
+    nombre = UpperCharField(max_length=150, null=True, verbose_name = "Nombre", uppercase=True)
     image = models.ImageField(upload_to="tipo", null=True, verbose_name="Foto", blank=True)
 
     date_created = models.DateTimeField(auto_now_add=True, null=True, verbose_name = "Creación")
