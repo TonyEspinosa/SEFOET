@@ -56,7 +56,7 @@ class m_proveedor(models.Model):
     direccion = models.CharField(max_length=250, null=True, blank=True, verbose_name = "Dirección")
     sitioweb = models.URLField(max_length=250, null=True, blank=True, verbose_name = "Sitio Web")
     facebook = models.CharField(max_length=250, null=True, blank=True, verbose_name = "Facebook")
-    presentacion = models.FileField(max_length=250, null=True, blank=True, verbose_name = "Presentación")
+    presentacion = models.FileField(upload_to="document", max_length=250, null=True, blank=True, verbose_name = "Presentación")
     canaco = models.BooleanField(default=True, verbose_name = "Canaco")
     RS = models.CharField(max_length=250, null=True, blank=True, verbose_name = "Razón Social")
     RFC = models.CharField(max_length=15, null=True, blank=True, verbose_name = "RFC")

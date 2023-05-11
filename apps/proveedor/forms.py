@@ -12,4 +12,15 @@ class fm_proveedor(ModelForm):
                   , 'contacto'
                   , 'puesto'
                   , 'email'
-                  , 'tel1']
+                  , 'tel1'
+                  , 'tel2'
+                  , 'pais'
+                  , 'estado'
+                  , 'ciudad'
+                  , 'direccion'
+                  , 'sitioweb'
+                  , 'facebook'
+                  , 'presentacion'
+                  , 'canaco'
+                  , 'RS'
+                  , 'RFC']

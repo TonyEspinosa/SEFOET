@@ -9,7 +9,7 @@ from .models import *
 from .forms import fm_categoria
 
 # Create your views here.
-#@login_required(login_url='u_usr_login')
+@login_required(login_url='u_usr_login')
 def v_cat(request):
     qCatTodo = m_categoria.objects.all()
     context = {'cat':qCatTodo}
@@ -20,8 +20,6 @@ def v_cat(request):
 def v_cat_new(request):
     form = fm_categoria()
     if request.method == 'POST':
-        #Imprimir en línea de comandos cuando sea un POST
-        #print('Printing POST:', request.POST) 
         form = fm_categoria(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -46,6 +44,7 @@ def v_cat_upd(request, pk_cat):
 @login_required(login_url='u_usr_login')
 def v_cat_del(request, pk_cat):
     qCatID = m_categoria.objects.get(id_categoria = pk_cat)
+    
     if request.method == "POST":
         qCatID.delete()
         return redirect('u_cat_list')
