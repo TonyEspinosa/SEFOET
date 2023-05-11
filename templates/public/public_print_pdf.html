@@ -97,6 +97,23 @@
                                 <br>
                                 <hr>                    
                             </div>
+                            {% if proveedor.presentacion %}
+                                <div class="card-body">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Presentacion</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <td><a href="{{ prov.presentacion.url }}" target="_blank"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-solid fa-file-pdf"> PDF</i></button></a></td>
+                                    </tbody>                    
+                                    </table>
+                                    <br>
+                                    <hr>                    
+                                </div>
+                            {% endif %}
+                            
                         </div>
                     </div>
                     </div>

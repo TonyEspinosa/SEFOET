@@ -28,7 +28,7 @@
     <th>Descripción</th>
     <th>Contacto</th>
     <th>Estado</th>
-    <th>Descargas</th>
+    <th style="width: 220px">Descargas</th>
 {% endblock %}
 
 {% block Table_Body %}
@@ -55,7 +55,10 @@
                 <td scope="row">{{ prov.estado }}</td>
                 <td>
                     <a href="{% url 'u_pdf_view' prov.id_proveedor %}" target="_blank"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-solid fa-eye"> ver</i></button></a>
-                    <a href="{% url 'u_pdf_view' prov.id_proveedor %}" target="_blank"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-solid fa-file-pdf"> PDF</i></button></a>
+
+                    {% if prov.presentacion %}
+                        <a href="{{ prov.presentacion.url }}" target="_blank"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-solid fa-file-pdf"> PDF</i></button></a>
+                    {% endif %}
 
                     {% if prov.canaco %}
                         <img src="{% static '/img/canaco.png' %}" style="width:20px; height:20px;" />
