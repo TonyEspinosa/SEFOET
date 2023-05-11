@@ -36,7 +36,7 @@ class m_categoria(models.Model):
 
     def __str__(self) -> str:
         return self.nombre  # type: ignoree
-    
+
     def setColorCategory():
         COLORS = {
             1 : '#FFCC00', #Amarillo

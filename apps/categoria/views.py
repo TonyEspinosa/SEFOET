@@ -12,6 +12,7 @@ from .forms import fm_categoria
 @login_required(login_url='u_usr_login')
 def v_cat(request):
     qCatTodo = m_categoria.objects.all()
+        
     context = {'cat':qCatTodo}
     m_categoria.setColorCategory()
     return render(request, 'cat_list.html', context)

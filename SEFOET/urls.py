@@ -30,9 +30,9 @@ urlpatterns = [
     ## Páginas publicas
     path('', views.v_home, name = "u_home"),
     path('lista/<str:pk_cat>/', views.v_list, name = "u_list"),
-#    path('pdf_view/<str:pk_prov>/', views.v_ViewPDF, name="u_pdf_view"),
+    path('pdf_view/<str:pk_prov>/', views.v_ViewPDF, name="u_pdf_view"),
 
-#    path('export_excel/<str:pk_cat>/', views.v_export_excel, name="u_export_excel"),
+    path('export_excel/<str:pk_cat>/', views.v_export_excel, name="u_export_excel"),
 
     
     ## Paginas Privadas
