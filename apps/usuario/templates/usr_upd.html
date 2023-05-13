@@ -12,6 +12,7 @@
                 {% csrf_token %}
                 {{ form | crispy }}
                 <br>
+                <a class="btn btn-warning" href="{% url 'u_usr_list' %}">Cancelar</a>
                 <input type="submit" class="btn btn-primary" name="Guardar Usuario" value="Guardar">
                 <p> </p>
             </form>
