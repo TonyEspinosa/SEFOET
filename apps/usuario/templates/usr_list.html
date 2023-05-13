@@ -2,19 +2,23 @@
 {% load static %}
 
 {% block Table_Title %}
-    Usuarios
+    <a href="{% url 'u_home_priv' %}"><button type="button" class="btn btn-info float-left btn-sm"><i class="fas fa-solid fa-chevron-left"> Regresar</i></button></a>
 {% endblock %}
 
 {% block Table_Links %}
-    
+    <a href="{% url 'u_export_excel_usr' %}"><button type="button" class="btn btn-primary float-right"><i class="fas fa-file-excel"> Excel </i></button></a>
 {% endblock %}
 
 {% block Table_Desc %}
-    Listado de Usuarios
+    USUARIOS
+{% endblock %}
+
+{% block Card_Options %}
+
 {% endblock %}
 
 {% block Table_Head %}
-    <th>Usuario</th>
+    <th>Nombre del Usuario</th>
     <td style="width: 220px">Acciones</td>
 {% endblock %}
 
@@ -24,11 +28,8 @@
         {% for item in usrs %}
             <tr class="table-active">
                 <th scope="row">{{ item.username }}</th>
-                <!-- <th scope="row">{{ item.user.username }}</th>-->
                 <td>
-                    <!-- <a href="{# url 'u_usr_upd' item.id_user #}"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt fa-solid"> Editar</i></button></a>-->
                     <a href="{% url 'u_usr_upd' item.username %}"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt fa-solid"> Editar</i></button></a>
-                    <!-- <a href="{# url 'u_usr_del' item.id_user #}"><button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt fa-solid"> Eliminar</i></button></a>-->
                     <a href="{% url 'u_usr_del' item.username %}"><button type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt fa-solid"> Eliminar</i></button></a>
                 </td>
             </tr>
@@ -40,8 +41,7 @@
 {% endblock %}
 
 {% block Table_Foot %}
-    <th>Usuario</th>
-    <td>Acciones</td>
+    
 {% endblock %}
 
 {% block Table_Button %}

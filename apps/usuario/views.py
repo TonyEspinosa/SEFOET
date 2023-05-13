@@ -1,60 +1,67 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+
+import datetime
+import xlwt
 
 from django.contrib import messages
-#from .querys import qUsrTodo
-#from django.contrib.auth.models import User
+from .querys import qUsrTodo
+from django.contrib.auth.models import User
 
 #Login
-#from .forms import CreateUserForm
+from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
-#from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 #Captcha
 from django.conf import settings
 import urllib
 import json
 
-#@login_required(login_url='u_usr_login')
+@login_required(login_url='u_usr_login')
 def v_usr(request):
-    pass
-#    context = {'usrs':qUsrTodo}
-#    return render(request, 'usr_list.html', context)
+   context = {'usrs':qUsrTodo}
+   return render(request, 'usr_list.html', context)
 
-#@login_required(login_url='u_usr_login')
+@login_required(login_url='u_usr_login')
 def v_usr_new(request):
-    pass
-#    form = CreateUserForm()
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Se creo la cuenta de usuario para ' + user)
+            return redirect('u_usr_list')
 
-#    if request.method == 'POST':
-#        form = CreateUserForm(request.POST)
-#        if form.is_valid():
-#            form.save()
-#            user = form.cleaned_data.get('username')
-#            messages.success(request, 'Se creo la cuenta de usuario para ' + user)
-#            return redirect('u_usr_list')
+    context = {'form':form}
+    return render(request, 'usr_new.html', context)
 
-#    context = {'form':form}
-#    return render(request, 'usr_new.html', context)
-
-#@login_required(login_url='u_usr_login')
+@login_required(login_url='u_usr_login')
 def v_usr_upd(request, pk_usr):
-    pass
-#    qUsrID = User.objects.get(username = pk_usr)
-#    form = CreateUserForm(instance = qUsrID)
-#    context = {'form':form}
-#    return render(request, 'usr_new.html', context)
+    qUsrID = User.objects.get(username = pk_usr)
+    form = CreateUserForm(instance = qUsrID)
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Se creo la cuenta de usuario para ' + user)
+            return redirect('u_usr_list')
 
-#@login_required(login_url='u_usr_login')
+    context = {'form':form}
+    return render(request, 'usr_upd.html', context)
+
+@login_required(login_url='u_usr_login')
 def v_usr_del(request, pk_usr):
-    pass
-#    qUsrID = User.objects.get(username = pk_usr)
+   qUsrID = User.objects.get(username = pk_usr)
 
-#    if request.method == "POST":
-#        qUsrID.delete()
-#        return redirect('u_usr_list')
+   if request.method == "POST":
+       qUsrID.delete()
+       return redirect('u_usr_list')
         
-#    context = {'item':qUsrID}
-#    return render(request, 'usr_del.html', context)
+   context = {'item':qUsrID}
+   return render(request, 'usr_del.html', context)
 
 ## Login
 def v_usr_login(request):
@@ -91,6 +98,44 @@ def v_usr_login(request):
         return render(request, 'usr_login.html', context)
 
 ## Logout
+@login_required(login_url='u_usr_login')
 def v_usr_logout(request):
     logout(request)
     return redirect('u_usr_login')
+
+## Change Password
+@login_required(login_url='u_usr_login')
+def v_usr_chng(request):
+    pass
+
+@login_required(login_url='u_usr_login')
+def v_export_excel(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=Usuario' + \
+        str(datetime.datetime.now()) + '.xls'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Usuario')
+    row_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+
+    columns = ['Nombre']
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    font_style = xlwt.XFStyle()
+    #font_style.font.bold = False
+
+    #rows = m_categoria.objects.all().values_list('nombre', 'descripcion')
+
+    for row in qUsrTodo:
+        print(row)
+        row_num+=1
+
+        ws.write(row_num, col_num, str(row), font_style)
+
+    wb.save(response)
+
+    return response

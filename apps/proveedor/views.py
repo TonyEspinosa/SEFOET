@@ -38,7 +38,7 @@ def v_prov_upd(request, pk_prov):
             form.save()
             return redirect('u_prov_list')
     context = {'form':form}
-    return render(request, 'prov_new.html', context)
+    return render(request, 'prov_upd.html', context)
 
 @login_required(login_url='u_usr_login')
 def v_prov_del(request, pk_prov):

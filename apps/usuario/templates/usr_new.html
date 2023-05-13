@@ -6,13 +6,14 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-6">
+    <div class="col-4">
         <div class="card-body">
             <form action="" method="POST">
                 {% csrf_token %}
-                {{ form | crispy}}
+                {{ form | crispy }}
                 <br>
-                <input type="submit" class="btn btn-primary" name="Guardar">
+                <input type="submit" class="btn btn-primary" name="Crear Usuario" value="Guardar">
+                <p> </p>
             </form>
         </div>
     </div>

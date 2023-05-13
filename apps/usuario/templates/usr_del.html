@@ -11,9 +11,9 @@
         <form action="{% url 'u_usr_del' item.username %}" method="POST">
 
             {% csrf_token %}
-            <a class="btn btn-warning" href="{% url 'u_usr_list' %}">Cancel</a>
+            <a class="btn btn-warning" href="{% url 'u_usr_list' %}">Cancelar</a>
 
-            <input class="btn btn-danger" type="submit" name="Confirm">
+            <input class="btn btn-danger" type="submit" value="Aceptar">
         </form>
         </div>
     </div>

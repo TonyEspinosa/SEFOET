@@ -42,6 +42,9 @@
                         <img src="{% static '/img/logoGobYuc.png' %}" style="width:20px; height:20px;" />
                     {% endif%}
                     {{ prov.nombre }}
+                    {% if prov.facebook %}
+                        <a href="{{ prov.facebook }}" target="_blank"><button type="button" class="btn btn-info float-right btn-sm"><i class="fab fa-facebook-f"></i></button></a>
+                    {% endif %}
                     {% if prov.sitioweb %}
                         <a href="{{ prov.sitioweb }}" target="_blank"><button type="button" class="btn btn-info float-right btn-sm"><i class="fas fa-solid fa-globe"> web</i></button></a>
                     {% endif %}
