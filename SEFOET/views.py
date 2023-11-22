@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .utils import render_to_pdf
 from django.contrib.auth.decorators import login_required
 
+from apps.proveedor.filters import ProveedorFilter
 import xlwt
 
 # Paginas Privadas
@@ -21,8 +22,13 @@ def v_home(request):
 def v_list(request, pk_cat):
     qCatID = m_categoria.objects.get(id_categoria = pk_cat)
     qProvFiltered = qCatID.m_proveedor_set.all()
+
+    myFilter = ProveedorFilter(request.GET, queryset=qProvFiltered)
+    qProvFiltered = myFilter.qs
+
     #qProvFiltered = m_proveedor.objects.filter(m_categoria__id_categoria=pk_cat)
-    context = {'categoria':qCatID, 'proveedor':qProvFiltered}
+    context = {'categoria':qCatID, 'proveedor':qProvFiltered, 'myFilter':myFilter}
+    #context = {'categoria':qCatID, 'proveedor':qProvFiltered}
     return render(request, 'public/public_cat_list.html', context)
 
 # View PDF file

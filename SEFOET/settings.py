@@ -40,6 +40,10 @@ INSTALLED_APPS = [
      # Optional: Django admin theme (must be before django.contrib.admin)
     'adminlte3_theme',
 
+    #Filtros para busqueda
+    'django_filters',
+    'django_filters_groups',
+
     #Crispy Forms
     'crispy_forms',
     'crispy_bootstrap4',
@@ -99,7 +103,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -156,3 +159,5 @@ GOOGLE_RECAPTCHA_SECRET_KEY = config("GOOGLE_RECAPTCHA_SECRET_KEY")
 
 #
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+DEFAULT_FILTER_BACKENDS: ['django_filters.rest_framework.DjangoFilterBackend', 'rest_framework.FilterSet']

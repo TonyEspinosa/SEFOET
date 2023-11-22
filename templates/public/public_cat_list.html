@@ -8,12 +8,24 @@
 
 {% block Table_Links %}
     <div class="input-group">
-        <input type="search" class="form-control form-control-lg" placeholder="Buscar">
+        <div class="input-group-append">
+            <form method="get">
+                {{ myFilter.form }}
+                <button type="submit" class="btn btn-lg btn-default">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!--
+        <input type="search" class="form-control form-control-lg" placeholder="Buscar...">
         <div class="input-group-append">
             <button type="submit" class="btn btn-lg btn-default">
                 <i class="fas fa-search"></i>
             </button>
         </div>
+        -->
+        <a>&nbsp;&nbsp;&nbsp;</a>
 
         <a href="{% url 'u_export_excel' categoria.id_categoria %}"><button type="button" class="btn btn-primary float-right"><i class="fas fa-file-excel"> Excel </i></button></a>
     </div>
