@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from .utils import render_to_pdf
 from django.contrib.auth.decorators import login_required
 
-from apps.proveedor.filters import ProveedorFilter
+from django_filters.views import FilterView
+from apps.proveedor.filters import ProvFilTer, ProveedorFilter
 import xlwt
 
 # Paginas Privadas

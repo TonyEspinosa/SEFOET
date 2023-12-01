@@ -62,7 +62,10 @@
                     {% endif %}
                 </td>
                 <td scope="row">{{ prov.descripcion }}</td>
-                <td scope="row">{{ prov.tel1 }}
+                <td scope="row">
+                    {{ prov.contacto }}
+                      -  
+                    {{ prov.tel1 }}
                     {% if prov.email %}
                         <a href="mailto: {{ prov.email }}"><button type="button" class="btn btn-info float-right btn-sm"><i class="fas fa-solid fa-envelope"> email</i></button></a>
                     {% endif %}
