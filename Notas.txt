@@ -3,6 +3,10 @@
 2.- Crear carpeta del proyecto
 3.- Crear ambiente virtual en carpeta
 4.- Copiar archivos
+5.- Configurar variables de ambiente
+6.- Probar conexión a PostgreSQL
+7.- Dar de alta los tipos de Proveedores (Productos y Servicios)
+
 
 * Requerimientos:
 Django - Framework
